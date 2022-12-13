@@ -8,7 +8,7 @@
 import UIKit
 import CoreData
 
-class TaskViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, AddTodoProtocol {
+class TaskViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, AddTodoProtocol, EditTodoProtocol {
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var taskModels = [TaskItem]()
     var filteredData = [TaskItem]()
@@ -61,39 +61,16 @@ class TaskViewController: UIViewController, UITableViewDelegate, UITableViewData
         tableView.deselectRow(at: indexPath, animated: true)
         
         let item = taskModels[indexPath.row]
-        
-//
-//         let sheet = UIAlertController(title: "Edit", message: nil, preferredStyle: .actionSheet)
-//
-//        sheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-//        sheet.addAction(UIAlertAction(title: "Edit", style: .default, handler: { _ in
-//            let alert = UIAlertController(title: "Edit Item", message: "Edit your item", preferredStyle: .alert)
-//            alert.addTextField(configurationHandler: nil)
-//            alert.textFields?.first?.text = item.name
-//            alert.addAction(UIAlertAction(title: "Save", style: .cancel, handler: { [weak self] _ in
-//                guard let field = alert.textFields?.first, let newName = field.text, !newName.isEmpty else {
-//                    return
-//                }
-//                self?.updateTask(task: item, name: newName)
-//
-//            }))
-//            self.present(alert, animated: true)
-//        }))
-        
-//        sheet.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { [weak self] _ in
-//
-//        }))
 
-        //present(sheet, animated: true)
         if let vc = storyboard?.instantiateViewController(withIdentifier: "SeeTaskViewController") as? SeeTaskViewController {
             self.navigationController?.pushViewController(vc, animated: true)
 //            vc.title1TF?.text = item.name
 //            vc.desc1TF?.text = item.taskDescription
-            
-            //if let
+
             vc.taskTitle = item.name ?? ""
             vc.taskDesc = item.taskDescription ?? ""
-            
+            itemUpdate.append(item)
+            print(itemUpdate[0].name)
         }
     }
     
@@ -172,9 +149,9 @@ class TaskViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
     
-    func updateTask(task: TaskItem, name: String){
+    func updateTask(task: TaskItem, name: String, desc: String){
         task.name = name
-        task.taskDescription = "Updated"
+        task.taskDescription = desc
         
         //MARK: Edit date to take input for a due date for a task
         task.doTaskBy = Date()
