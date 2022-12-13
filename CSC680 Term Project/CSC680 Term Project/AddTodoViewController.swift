@@ -10,7 +10,7 @@ import CoreData
 import UIKit
 
 protocol AddTodoProtocol {
-    func createTask(name: String)
+    func createTask(name: String, desc: String)
 }
 class AddTodoViewController: UIViewController{
     var delegate: AddTodoProtocol?
@@ -21,11 +21,14 @@ class AddTodoViewController: UIViewController{
     @IBAction func addAction(_ sender: Any) {
         guard
             let name = nameTF.text,
-            let desc = descTF.text
+            let desc = descTF.text,
+            !name.isEmpty,
+            !desc.isEmpty
         else {
+            print("Name and/or description must not be empty")
             return
         }
-        delegate?.createTask(name: name)
+        delegate?.createTask(name: name, desc: desc)
         navigationController?.popViewController(animated: true)
     }
     

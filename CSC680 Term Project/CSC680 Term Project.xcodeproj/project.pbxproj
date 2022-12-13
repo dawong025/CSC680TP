@@ -17,6 +17,7 @@
 		802EF584293356CD00118E77 /* TaskItem+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 802EF582293356CD00118E77 /* TaskItem+CoreDataClass.swift */; };
 		802EF585293356CD00118E77 /* TaskItem+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 802EF583293356CD00118E77 /* TaskItem+CoreDataProperties.swift */; };
 		80EB73002948371E00024858 /* AddTodoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80EB72FF2948371E00024858 /* AddTodoViewController.swift */; };
+		80EB7304294865FB00024858 /* SeeTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80EB7303294865FB00024858 /* SeeTaskViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		802EF582293356CD00118E77 /* TaskItem+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TaskItem+CoreDataClass.swift"; sourceTree = "<group>"; };
 		802EF583293356CD00118E77 /* TaskItem+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TaskItem+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		80EB72FF2948371E00024858 /* AddTodoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTodoViewController.swift; sourceTree = "<group>"; };
+		80EB7303294865FB00024858 /* SeeTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeeTaskViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +70,7 @@
 				802EF56B293349B500118E77 /* AppDelegate.swift */,
 				802EF56D293349B500118E77 /* SceneDelegate.swift */,
 				80EB72FF2948371E00024858 /* AddTodoViewController.swift */,
+				80EB7303294865FB00024858 /* SeeTaskViewController.swift */,
 				802EF56F293349B500118E77 /* TaskViewController.swift */,
 				802EF571293349B500118E77 /* Main.storyboard */,
 				802EF577293349B600118E77 /* Assets.xcassets */,
@@ -163,6 +166,7 @@
 				802EF570293349B500118E77 /* TaskViewController.swift in Sources */,
 				802EF56C293349B500118E77 /* AppDelegate.swift in Sources */,
 				802EF56E293349B500118E77 /* SceneDelegate.swift in Sources */,
+				80EB7304294865FB00024858 /* SeeTaskViewController.swift in Sources */,
 				802EF584293356CD00118E77 /* TaskItem+CoreDataClass.swift in Sources */,
 				802EF585293356CD00118E77 /* TaskItem+CoreDataProperties.swift in Sources */,
 			);

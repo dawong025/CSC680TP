@@ -7,11 +7,11 @@
 
 import UIKit
 import CoreData
-let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-var taskModels = [TaskItem]()
 
 class TaskViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, AddTodoProtocol {
-
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    var taskModels = [TaskItem]()
+    var filteredData = [TaskItem]()
     
     private let searchVC = UISearchController(searchResultsController: nil)
     
@@ -33,24 +33,13 @@ class TaskViewController: UIViewController, UITableViewDelegate, UITableViewData
         view.addSubview(tableView)
         loadAllTasks()
         
+        filteredData = taskModels
+        
         tableView.delegate = self
         tableView.dataSource = self
         tableView.frame = view.bounds
         
     }
-    
-    //Prompts to Create, Edit, and Delete Tasks
-//    @objc private func didTapAdd(){
-//        let alert = UIAlertController(title: "New Item", message: "Enter new item", preferredStyle: .alert)
-//        alert.addTextField(configurationHandler: nil)
-//        alert.addAction(UIAlertAction(title: "Submit", style: .cancel, handler: { [weak self] _ in
-//            guard let field = alert.textFields?.first, let text = field.text, !text.isEmpty else {
-//                return
-//            }
-//            self?.createTask(name: text)
-//        }))
-//        present(alert, animated: true)
-//    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return taskModels.count
@@ -63,33 +52,48 @@ class TaskViewController: UIViewController, UITableViewDelegate, UITableViewData
         return cell
     }
     
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        let item = taskModels[indexPath.row]
+        self.deleteTask(item: item)
+    }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
         let item = taskModels[indexPath.row]
         
-        let sheet = UIAlertController(title: "Edit", message: nil, preferredStyle: .actionSheet)
+//
+//         let sheet = UIAlertController(title: "Edit", message: nil, preferredStyle: .actionSheet)
+//
+//        sheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+//        sheet.addAction(UIAlertAction(title: "Edit", style: .default, handler: { _ in
+//            let alert = UIAlertController(title: "Edit Item", message: "Edit your item", preferredStyle: .alert)
+//            alert.addTextField(configurationHandler: nil)
+//            alert.textFields?.first?.text = item.name
+//            alert.addAction(UIAlertAction(title: "Save", style: .cancel, handler: { [weak self] _ in
+//                guard let field = alert.textFields?.first, let newName = field.text, !newName.isEmpty else {
+//                    return
+//                }
+//                self?.updateTask(task: item, name: newName)
+//
+//            }))
+//            self.present(alert, animated: true)
+//        }))
         
-        sheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        sheet.addAction(UIAlertAction(title: "Edit", style: .default, handler: { _ in
-            let alert = UIAlertController(title: "Edit Item", message: "Edit your item", preferredStyle: .alert)
-            alert.addTextField(configurationHandler: nil)
-            alert.textFields?.first?.text = item.name
-            alert.addAction(UIAlertAction(title: "Save", style: .cancel, handler: { [weak self] _ in
-                guard let field = alert.textFields?.first, let newName = field.text, !newName.isEmpty else {
-                    return
-                }
-                self?.updateTask(task: item, name: newName)
-                
-            }))
-            self.present(alert, animated: true)
-        }))
-        
-        sheet.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { [weak self] _ in
-            self?.deleteTask(item: item)
-        }))
+//        sheet.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { [weak self] _ in
+//
+//        }))
 
-        present(sheet, animated: true)
+        //present(sheet, animated: true)
+        if let vc = storyboard?.instantiateViewController(withIdentifier: "SeeTaskViewController") as? SeeTaskViewController {
+            self.navigationController?.pushViewController(vc, animated: true)
+//            vc.title1TF?.text = item.name
+//            vc.desc1TF?.text = item.taskDescription
+            vc.taskTitle = item.name ?? ""
+            vc.taskDesc = item.taskDescription ?? ""
+            print(item.name)
+            //vc.desc1TF?.text = item.taskDescription
+        }
     }
     
     private func createSearchBar(){
@@ -97,11 +101,15 @@ class TaskViewController: UIViewController, UITableViewDelegate, UITableViewData
         searchVC.searchBar.delegate = self
     }
     
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        guard let text = searchBar.text, !text.isEmpty else {
-            return
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchText == "" {
+            filteredData = taskModels
         }
-        loadAllTasks()
+        else{
+            loadAllTasks(name: searchText)
+            //filteredData = taskModels
+            self.tableView.reloadData()
+        }
     }
     
     //Core Data - Load, Create, Delete, and Update Tasks
@@ -116,12 +124,26 @@ class TaskViewController: UIViewController, UITableViewDelegate, UITableViewData
             
         }
     }
+    func loadAllTasks(name: String){
+        do {
+            let fetchRequest: NSFetchRequest<TaskItem> = TaskItem.fetchRequest()
+            let predicate = NSPredicate(format: "name CONTAINS %a", name)
+            fetchRequest.predicate = predicate
+            taskModels = try context.fetch(fetchRequest)
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
+        catch{
+            
+        }
+    }
     
-    func createTask(name: String){
+    func createTask(name: String, desc: String){
         let newTask = TaskItem(context: context)
         newTask.name = name
         //MARK FIX
-        newTask.taskDescription = "Hello"
+        newTask.taskDescription = desc
         newTask.createdAt = Date()
         //MARK: Edit date to take input for a due date for a task
         newTask.doTaskBy = Date()
@@ -129,6 +151,7 @@ class TaskViewController: UIViewController, UITableViewDelegate, UITableViewData
         do {
             try context.save()
             loadAllTasks()
+            filteredData = taskModels
         }
         catch {
             
@@ -141,6 +164,7 @@ class TaskViewController: UIViewController, UITableViewDelegate, UITableViewData
         do {
             try context.save()
             loadAllTasks()
+            filteredData = taskModels
         }
         catch{
             
@@ -156,16 +180,17 @@ class TaskViewController: UIViewController, UITableViewDelegate, UITableViewData
         do {
             try context.save()
             loadAllTasks()
+            filteredData = taskModels
         }
         catch{
             
         }
     }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let addTodoViewController = segue.destination as? AddTodoViewController {
             addTodoViewController.delegate = self
         }
     }
-
 }
 

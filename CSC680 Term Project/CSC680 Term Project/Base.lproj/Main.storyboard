@@ -30,6 +30,46 @@
             </objects>
             <point key="canvasLocation" x="775" y="-48"/>
         </scene>
+        <!--View Task-->
+        <scene sceneID="Z5d-dQ-gfL">
+            <objects>
+                <viewController storyboardIdentifier="SeeTaskViewController" id="Mlm-Oa-1q8" customClass="SeeTaskViewController" customModule="CSC680_Term_Project" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="rYH-kc-9ko" customClass="SeeTaskViewController">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Task Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JPO-39-5el">
+                                <rect key="frame" x="20" y="64" width="374" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="k3f-3v-tNL"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Task Description" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="11" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UZz-NQ-I9K">
+                                <rect key="frame" x="20" y="105" width="126.5" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="3aB-WM-AOF"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="3aB-WM-AOF" firstAttribute="trailing" secondItem="JPO-39-5el" secondAttribute="trailing" constant="20" id="7OH-yb-QHF"/>
+                            <constraint firstItem="JPO-39-5el" firstAttribute="leading" secondItem="3aB-WM-AOF" secondAttribute="leading" constant="20" id="8eQ-TE-FQn"/>
+                            <constraint firstItem="JPO-39-5el" firstAttribute="top" secondItem="3aB-WM-AOF" secondAttribute="top" constant="20" id="ZcV-n7-3g4"/>
+                            <constraint firstItem="UZz-NQ-I9K" firstAttribute="leading" secondItem="3aB-WM-AOF" secondAttribute="leading" constant="20" id="bDa-OV-xps"/>
+                            <constraint firstItem="UZz-NQ-I9K" firstAttribute="top" secondItem="JPO-39-5el" secondAttribute="bottom" constant="20" id="nLn-XJ-bpB"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="View Task" id="yIu-gP-49t"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8Zh-H7-tJq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="757.97101449275374" y="633.48214285714278"/>
+        </scene>
         <!--Add A Task-->
         <scene sceneID="k6t-Ih-bl8">
             <objects>
