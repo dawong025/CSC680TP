@@ -43,7 +43,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="k3f-3v-tNL"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="23"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -65,6 +65,10 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="View Task" id="yIu-gP-49t"/>
+                    <connections>
+                        <outlet property="desc1TF" destination="UZz-NQ-I9K" id="EoW-Rw-YCG"/>
+                        <outlet property="title1TF" destination="JPO-39-5el" id="RZr-dE-rQp"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8Zh-H7-tJq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

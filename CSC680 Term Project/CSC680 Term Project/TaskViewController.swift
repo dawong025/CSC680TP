@@ -89,10 +89,11 @@ class TaskViewController: UIViewController, UITableViewDelegate, UITableViewData
             self.navigationController?.pushViewController(vc, animated: true)
 //            vc.title1TF?.text = item.name
 //            vc.desc1TF?.text = item.taskDescription
+            
+            //if let
             vc.taskTitle = item.name ?? ""
             vc.taskDesc = item.taskDescription ?? ""
-            print(item.name)
-            //vc.desc1TF?.text = item.taskDescription
+            
         }
     }
     
