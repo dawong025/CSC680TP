@@ -18,11 +18,90 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <navigationItem key="navigationItem" id="SnQ-oa-1I3"/>
+                    <navigationItem key="navigationItem" id="SnQ-oa-1I3">
+                        <barButtonItem key="rightBarButtonItem" title="Add" id="lsW-Fr-EsN">
+                            <connections>
+                                <segue destination="KU9-CK-MaM" kind="show" id="QVF-1p-1nx"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="775" y="-48"/>
+        </scene>
+        <!--Add A Task-->
+        <scene sceneID="k6t-Ih-bl8">
+            <objects>
+                <viewController id="KU9-CK-MaM" customClass="AddTodoViewController" customModule="CSC680_Term_Project" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="7QT-FU-iOu">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Task Description:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="paQ-ko-l6m">
+                                <rect key="frame" x="20" y="255" width="374" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RSy-Pk-ISB">
+                                <rect key="frame" x="20" y="201" width="374" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Task Name:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="193-Vn-HaI">
+                                <rect key="frame" x="20" y="160" width="374" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Vw9-Jd-meC">
+                                <rect key="frame" x="20" y="307" width="374" height="128"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="128" id="Cvf-RB-PpH"/>
+                                </constraints>
+                                <color key="textColor" systemColor="labelColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ffQ-JH-p2x">
+                                <rect key="frame" x="179" y="455" width="56" height="31"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Save"/>
+                                <connections>
+                                    <action selector="addAction:" destination="KU9-CK-MaM" eventType="touchUpInside" id="U38-7Z-Md9"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="pjE-dQ-jWL"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="paQ-ko-l6m" firstAttribute="leading" secondItem="pjE-dQ-jWL" secondAttribute="leading" constant="20" id="9Mk-BM-8CF"/>
+                            <constraint firstItem="ffQ-JH-p2x" firstAttribute="centerX" secondItem="pjE-dQ-jWL" secondAttribute="centerX" id="BQe-mp-8yP"/>
+                            <constraint firstItem="pjE-dQ-jWL" firstAttribute="trailing" secondItem="193-Vn-HaI" secondAttribute="trailing" constant="20" id="EMy-l5-cGl"/>
+                            <constraint firstItem="RSy-Pk-ISB" firstAttribute="leading" secondItem="pjE-dQ-jWL" secondAttribute="leading" constant="20" id="Hkp-2D-Myz"/>
+                            <constraint firstItem="pjE-dQ-jWL" firstAttribute="trailing" secondItem="RSy-Pk-ISB" secondAttribute="trailing" constant="20" id="Qfq-Bi-Fom"/>
+                            <constraint firstItem="ffQ-JH-p2x" firstAttribute="top" secondItem="Vw9-Jd-meC" secondAttribute="bottom" constant="20" id="Y3E-1s-rU3"/>
+                            <constraint firstItem="193-Vn-HaI" firstAttribute="leading" secondItem="pjE-dQ-jWL" secondAttribute="leading" constant="20" id="b7k-2b-aIm"/>
+                            <constraint firstItem="Vw9-Jd-meC" firstAttribute="top" secondItem="paQ-ko-l6m" secondAttribute="bottom" constant="31" id="cjw-PO-jXK"/>
+                            <constraint firstItem="pjE-dQ-jWL" firstAttribute="trailing" secondItem="paQ-ko-l6m" secondAttribute="trailing" constant="20" id="hTw-iN-VVg"/>
+                            <constraint firstItem="paQ-ko-l6m" firstAttribute="top" secondItem="RSy-Pk-ISB" secondAttribute="bottom" constant="20" id="jEX-N1-vso"/>
+                            <constraint firstItem="RSy-Pk-ISB" firstAttribute="top" secondItem="193-Vn-HaI" secondAttribute="bottom" constant="20" id="oEP-Ob-BGb"/>
+                            <constraint firstItem="pjE-dQ-jWL" firstAttribute="trailing" secondItem="Vw9-Jd-meC" secondAttribute="trailing" constant="20" id="oNw-gY-meP"/>
+                            <constraint firstItem="193-Vn-HaI" firstAttribute="top" secondItem="pjE-dQ-jWL" secondAttribute="top" constant="20" id="pkX-Wy-xJc"/>
+                            <constraint firstItem="Vw9-Jd-meC" firstAttribute="leading" secondItem="pjE-dQ-jWL" secondAttribute="leading" constant="20" id="zyj-JF-rLP"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Add A Task" id="88l-R9-uuM"/>
+                    <connections>
+                        <outlet property="descTF" destination="Vw9-Jd-meC" id="CAl-CR-3lj"/>
+                        <outlet property="nameTF" destination="RSy-Pk-ISB" id="AGb-nu-0Iu"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="EbY-sp-Dka" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1620" y="-48"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="yhb-a3-auK">
@@ -44,6 +123,9 @@
         </scene>
     </scenes>
     <resources>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

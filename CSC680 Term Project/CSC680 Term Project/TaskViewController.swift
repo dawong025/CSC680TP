@@ -7,14 +7,13 @@
 
 import UIKit
 import CoreData
+let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+var taskModels = [TaskItem]()
 
-class TaskViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
+class TaskViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, AddTodoProtocol {
 
+    
     private let searchVC = UISearchController(searchResultsController: nil)
-    
-    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    
-    private var taskModels = [TaskItem]()
     
     let tableView: UITableView = {
         let table = UITableView()
@@ -29,7 +28,7 @@ class TaskViewController: UIViewController, UITableViewDelegate, UITableViewData
         //navigationItem.searchController = searchController
         createSearchBar()
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem (barButtonSystemItem: .add, target: self, action: #selector(didTapAdd))
+//        navigationItem.rightBarButtonItem = UIBarButtonItem (barButtonSystemItem: .add, target: self, action: #selector(didTapAdd))
         
         view.addSubview(tableView)
         loadAllTasks()
@@ -41,17 +40,17 @@ class TaskViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     //Prompts to Create, Edit, and Delete Tasks
-    @objc private func didTapAdd(){
-        let alert = UIAlertController(title: "New Item", message: "Enter new item", preferredStyle: .alert)
-        alert.addTextField(configurationHandler: nil)
-        alert.addAction(UIAlertAction(title: "Submit", style: .cancel, handler: { [weak self] _ in
-            guard let field = alert.textFields?.first, let text = field.text, !text.isEmpty else {
-                return
-            }
-            self?.createTask(name: text)
-        }))
-        present(alert, animated: true)
-    }
+//    @objc private func didTapAdd(){
+//        let alert = UIAlertController(title: "New Item", message: "Enter new item", preferredStyle: .alert)
+//        alert.addTextField(configurationHandler: nil)
+//        alert.addAction(UIAlertAction(title: "Submit", style: .cancel, handler: { [weak self] _ in
+//            guard let field = alert.textFields?.first, let text = field.text, !text.isEmpty else {
+//                return
+//            }
+//            self?.createTask(name: text)
+//        }))
+//        present(alert, animated: true)
+//    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return taskModels.count
@@ -162,7 +161,11 @@ class TaskViewController: UIViewController, UITableViewDelegate, UITableViewData
             
         }
     }
-
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let addTodoViewController = segue.destination as? AddTodoViewController {
+            addTodoViewController.delegate = self
+        }
+    }
 
 }
 
