@@ -11,7 +11,7 @@ Welcome to ProcrastiNOTe, the app to reduce procrastination in your daily life.
 - Be able to see all current tasks
 - store tasks using CoreData, database
     - create tasks
-    - edit tasks
+    - edit tasks (worked with didTapCell, but not with Edit View)
     - delete tasks
 - add a name, description for each task in creation
 - delete a task via swipe to the right
